@@ -1,17 +1,13 @@
 import { Component } from "react";
-import { Container, Card, CardMedia, CardContent, Typography } from "@mui/material";
+import { Container } from "@mui/material";
+import CurrentWeather from "./CurrentWeather"
 
 class Main extends Component {
     render() {
+        
         return (
-            <Container sx={{ marginTop: 3 }}>
-                <Card>
-                    <CardContent>
-                        <Typography variant="h5" component='div'>
-                            Current weather
-                        </Typography>
-                    </CardContent>
-                </Card>
+            <Container sx={{ paddingTop: 2 }}>
+                <CurrentWeather data={this.props.data} />
             </Container>
         )
     }
