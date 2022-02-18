@@ -1,39 +1,69 @@
 import { Component } from "react";
-import { Card, CardContent, Divider, Typography } from "@mui/material";
+import { Card, CardMedia, CardContent, Divider, Typography, Stack } from "@mui/material";
 
 class CurrentWeather extends Component {
+    getDate = (unix) => {
+        const months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ]
+        const d = new Date(unix * 1000)
+        const month = months[d.getMonth()].slice(0, 3)
+        const day = d.getDate()
+        const formattedDate = `${month}, ${day}`
+        return formattedDate
+    }
+
     render() {
-        const { weather, location } = this.props.data
+        const weather = this.props.data
 
         const listStyle = {
             marginLeft: 2,
             listStyle: 'none'
         }
 
-        console.log(this.props)
-
         return (
-            <Card>
-                <CardContent>
-                    <Typography variant="h5" component="div">Current Weather at { location.city }, { location.country }</Typography>
-                </CardContent>
+            <Card variant="outlined">
+                <Stack direction="row">
+                    <CardContent>
+                        <Typography variant="h3" component="div">
+                            {this.getDate(weather.timestamp)}
+                        </Typography>
+                    </CardContent>
+                    <CardMedia
+                        component="img"
+                        image={`http://openweathermap.org/img/wn/${weather.weather.icon}@2x.png`}
+                        alt={weather.weather.description}
+                    />
+                </Stack>
+
                 <Divider />
                 <CardContent>
                     <Typography variant="body1" component="div">
-                        <ul style={ listStyle }>
-                            <li><strong>Temperature:</strong> { weather.temp } C</li>
-                            <li><strong>Feels Like:</strong> { weather.feelsLike } C</li>
-                            <li><strong>Pressure:</strong> { weather.pres } mbar</li>
-                            <li><strong>Relative Humidity:</strong> { weather.rh }%</li>
+                        <ul style={listStyle}>
+                            <li><strong>Temperature:</strong> {weather.temp} C</li>
+                            <li><strong>Feels Like:</strong> {weather.feelsLike} C</li>
+                            <li><strong>Pressure:</strong> {weather.pres} mbar</li>
+                            <li><strong>Relative Humidity:</strong> {weather.rh}%</li>
                         </ul>
                     </Typography>
                 </CardContent>
                 <Divider />
                 <CardContent>
                     <Typography variant="body2" component="div">
-                        <ul style={ listStyle }>
-                            <li><strong>Dew Point:</strong> { weather.dewpt } C</li>
-                            <li><strong>UV Index:</strong> { weather.uv } C</li>
+                        <ul style={listStyle}>
+                            <li><strong>Dew Point:</strong> {weather.dewpt} C</li>
+                            <li><strong>UV Index:</strong> {weather.uv}</li>
                         </ul>
                     </Typography>
                 </CardContent>
