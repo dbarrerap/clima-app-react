@@ -24,7 +24,7 @@ class Main extends Component {
         let lat = pos.coords.latitude
         let long = pos.coords.longitude
 
-        let res = await axios.get(`https://us1.locationiq.com/v1/reverse.php?key=pk.3b435a5c2be471458ee4b4646ca4ea74&lat=${lat}&lon=${long}&format=json`)
+        let res = await axios.get(`https://us1.locationiq.com/v1/reverse.php?key=API_KEY&lat=${lat}&lon=${long}&format=json`)
         let location = { lat: lat, long: long, city: res.data.address.city, country: res.data.address.country }
         return location
     }
@@ -32,7 +32,7 @@ class Main extends Component {
     getWeather = async () => {
         let coords = await this.getLocation()
 
-        let res = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.long}&appid=517216a9175be173bb6916d2b8f1f86b&units=metric`)
+        let res = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.long}&appid=API_KEY&units=metric`)
 
         let weather = {
             timestamp: res.data.current.dt,
@@ -58,10 +58,6 @@ class Main extends Component {
     }
 
     render() {
-        console.log("location:", this.state.location)
-        console.log("weather:", this.state.weather)
-        console.log("forecast:", this.state.forecast)
-
         let weatherData = (
             <Container sx={{ paddingTop: 2 }}>
                 <Typography variant="h3" component="div">{this.state.location.city}, {this.state.location.country}</Typography>
