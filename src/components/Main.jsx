@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Container, Typography, Stack, Button } from "@mui/material";
 import CurrentWeather from "./CurrentWeather"
 import Forecast from "./Forecast";
-import axios from "axios";
+import Weather from "../services/Weather";
 
 class Main extends Component {
     state = {
@@ -13,48 +13,14 @@ class Main extends Component {
         forecast: []
     }
 
-    getCoordinates = () => {
-        return new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject)
-        })
-    }
-
-    getLocation = async () => {
-        const pos = await this.getCoordinates()
-        let lat = pos.coords.latitude
-        let long = pos.coords.longitude
-
-        let res = await axios.get(`https://us1.locationiq.com/v1/reverse.php?key=API_KEY&lat=${lat}&lon=${long}&format=json`)
-        let location = { lat: lat, long: long, city: res.data.address.city, country: res.data.address.country }
-        return location
-    }
-
-    getWeather = async () => {
-        let coords = await this.getLocation()
-
-        let res = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.long}&appid=API_KEY&units=metric`)
-
-        let weather = {
-            timestamp: res.data.current.dt,
-            temp: res.data.current.temp,
-            feelsLike: res.data.current.feels_like,
-            pres: res.data.current.pressure,
-            rh: res.data.current.humidity,
-            dewpt: res.data.current.dew_point,
-            uv: res.data.current.uvi,
-            weather: {
-                icon: res.data.current.weather[0].icon,
-                main: res.data.current.weather[0].main,
-                description: res.data.current.weather[0].description
-            }
-        }
-        let forecast = res.data.daily.slice(1, 4)
-
-        this.setState({ location: coords, weather, forecast })
+    getWeatherData = async () => {
+        const weatherModel = new Weather()
+        const { location, weather, forecast } = await weatherModel.getLocationWeather()
+        this.setState({ location, weather, forecast })
     }
 
     componentDidMount() {
-        this.getWeather()
+        this.getWeatherData()
     }
 
     render() {
@@ -73,7 +39,6 @@ class Main extends Component {
                         </Stack>
                     </Stack>
                 </Stack>
-                <Button variant="contained" onClick={this.getWeather}>Update</Button>
             </Container>
         )
 
@@ -88,6 +53,7 @@ class Main extends Component {
         return (
             <Container sx={{ paddingTop: 2 }}>
                 { showWeather }
+                <Button variant="contained" onClick={this.getWeatherData}>Update</Button>
             </Container>
             
         
