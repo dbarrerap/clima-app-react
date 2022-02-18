@@ -21,7 +21,8 @@ class CurrentWeather extends Component {
         const month = months[d.getMonth()].slice(0, 3)
         const day = d.getDate()
         const formattedDate = `${month}, ${day}`
-        return formattedDate
+        const fullDate = `${d.getFullYear()}/${String(d.getMonth()).padStart(2, 0)}/${String(day).padStart(2, 0)} ${d.getHours()}:${d.getMinutes()}`
+        return [formattedDate, fullDate]
     }
 
     render() {
@@ -37,7 +38,7 @@ class CurrentWeather extends Component {
                 <Stack direction="row">
                     <CardContent>
                         <Typography variant="h3" component="div">
-                            {this.getDate(weather.timestamp)}
+                            {this.getDate(weather.timestamp)[0]}
                         </Typography>
                     </CardContent>
                     <CardMedia
@@ -46,7 +47,11 @@ class CurrentWeather extends Component {
                         alt={weather.weather.description}
                     />
                 </Stack>
-
+                <CardContent>
+                    <Typography variant="body2" component="div">
+                        Last Update: {this.getDate(weather.timestamp)[1]}
+                    </Typography>
+                </CardContent>
                 <Divider />
                 <CardContent>
                     <Typography variant="body1" component="div">
