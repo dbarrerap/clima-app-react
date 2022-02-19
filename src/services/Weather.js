@@ -6,7 +6,7 @@ export default class Weather {
         let location = new Location()
         let locData = await location.getLocation()
 
-        const API_KEY = ''  // Ingresar llave aqui
+        const API_KEY = process.env.REACT_ENV_OPENWEATHER_API_KEY
         const API_URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${locData.lat}&lon=${locData.long}&appid=${API_KEY}&units=metric`
 
         const response = await axios.get(API_URL)

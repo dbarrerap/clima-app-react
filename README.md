@@ -8,4 +8,4 @@ La aplicacion requiere permisos de ubicacion.
 
 Para la informacion de ubicacion y meteorologica, se requiere generar API KEYs para los servicios usados, [LocationIQ](https://locationiq.com/) y [OpenWeatherMap](https://openweathermap.org/). Ambos servicios tienen opciones gratuitas.
 
-Estas llaves deben ser ingresadas en la variable `API_KEY` en los servicios correspondientes (Location.js, Weather.js) ubicados en la carpeta `services`.
+Estas llaves deben ser ingresadas en el archivo `.env` en sus variables respectivas.

@@ -14,7 +14,7 @@ export default class Location {
         let lat = position.coords.latitude
         let long = position.coords.longitude
 
-        const API_KEY = ''  // Ingresar llave aqui
+        const API_KEY = process.env.REACT_ENV_LOCATIONIQ_API_KEY
         const API_URL = `https://us1.locationiq.com/v1/reverse.php?key=${API_KEY}&lat=${lat}&lon=${long}&format=json`
 
         const response = await axios.get(API_URL)
