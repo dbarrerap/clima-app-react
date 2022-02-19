@@ -25,7 +25,7 @@ class Main extends Component {
 
     render() {
         let weatherData = (
-            <Container sx={{ paddingTop: 2 }}>
+            <>
                 <Typography variant="h3" component="div">{this.state.location.city}, {this.state.location.country}</Typography>
                 <Stack direction="row">
                     <Stack>
@@ -39,13 +39,13 @@ class Main extends Component {
                         </Stack>
                     </Stack>
                 </Stack>
-            </Container>
+            </>
         )
 
         let placeholder = (
-            <Container>
+            <>
                 <Typography variant="h4" component="div">Loading data...</Typography>
-            </Container>
+            </>
         )
 
         let showWeather = this.state.location.city === '' ? placeholder : weatherData
