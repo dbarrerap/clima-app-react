@@ -3,6 +3,7 @@ import { Container, Typography, Stack, Button } from "@mui/material";
 import CurrentWeather from "./CurrentWeather"
 import Forecast from "./Forecast";
 import Weather from "../services/Weather";
+import ReactLoading from "react-loading"
 
 class Main extends Component {
     state = {
@@ -42,11 +43,7 @@ class Main extends Component {
             </>
         )
 
-        let placeholder = (
-            <>
-                <Typography variant="h4" component="div">Loading data...</Typography>
-            </>
-        )
+        let placeholder = <ReactLoading type="bars" color="#003b6f" width={100} height={50} />
 
         let showWeather = this.state.location.city === '' ? placeholder : weatherData
         
