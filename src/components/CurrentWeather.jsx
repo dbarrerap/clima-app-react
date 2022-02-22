@@ -21,7 +21,7 @@ class CurrentWeather extends Component {
         const month = months[d.getMonth()].slice(0, 3)
         const day = d.getDate()
         const formattedDate = `${month}, ${day}`
-        const fullDate = `${d.getFullYear()}/${String(d.getMonth()).padStart(2, 0)}/${String(day).padStart(2, 0)} ${d.getHours()}:${d.getMinutes()}`
+        const fullDate = `${d.getFullYear()}/${month}/${String(day).padStart(2, 0)} ${d.getHours()}:${String(d.getMinutes()).padStart(2, 0)}`
         return [formattedDate, fullDate]
     }
 
