@@ -34,7 +34,7 @@ class CurrentWeather extends Component {
         }
 
         return (
-            <Card variant="outlined">
+            <Card variant="outlined" sx={{ margin: '0 5px 5px 0' }}>
                 <Stack direction="row">
                     <CardContent>
                         <Typography variant="h3" component="div">
@@ -43,7 +43,7 @@ class CurrentWeather extends Component {
                     </CardContent>
                     <CardMedia
                         component="img"
-                        image={`http://openweathermap.org/img/wn/${weather.weather.icon}@2x.png`}
+                        image={`http://openweathermap.org/img/wn/${weather.weather.icon}@4x.png`}
                         alt={weather.weather.description}
                     />
                 </Stack>

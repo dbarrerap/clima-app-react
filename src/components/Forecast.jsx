@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Card, CardContent, Divider, Typography, Stack, CardMedia } from "@mui/material";
+import { Card, CardContent, Divider, Typography, Stack, CardMedia, Grid } from "@mui/material";
 
 class Forecast extends Component {
     getDate = (unix) => {
@@ -26,6 +26,7 @@ class Forecast extends Component {
     render() {
         const forecast = this.props.data
         return (
+            <Grid item xs={4}>
             <Card>
                 <Stack direction="row">
                     <CardContent>
@@ -47,6 +48,7 @@ class Forecast extends Component {
                     />
                 </Stack>
             </Card>
+            </Grid>
         )
     }
 }

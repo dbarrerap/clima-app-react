@@ -22,6 +22,7 @@ export default class Location {
         return {
             lat, long,
             city: response.data.address.city,
+            town: response.data.address.town,
             country: response.data.address.country
         }
     }

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Container, Typography, Stack, Button } from "@mui/material";
+import { Container, Typography, Stack, Button, Grid } from "@mui/material";
 import CurrentWeather from "./CurrentWeather"
 import Forecast from "./Forecast";
 import Weather from "../services/Weather";
@@ -21,13 +21,12 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        this.getWeatherData()
+        // this.getWeatherData()
     }
 
     render() {
         let weatherData = (
             <>
-                <Typography variant="h3" component="div">{this.state.location.city}, {this.state.location.country}</Typography>
                 <Stack direction="row">
                     <Stack>
                         <Typography variant="h4" component="div">Current</Typography>
@@ -35,25 +34,27 @@ class Main extends Component {
                     </Stack>
                     <Stack>
                         <Typography variant="h4" component="div">Forecast</Typography>
-                        <Stack direction="row">
+                        <Grid container spacing={2}>
                             {this.state.forecast.map((day) => <Forecast key={day.dt} data={day} />)}
-                        </Stack>
+                        </Grid>
                     </Stack>
                 </Stack>
+
             </>
         )
 
         let placeholder = <ReactLoading type="bars" color="#003b6f" width={100} height={50} />
 
         let showWeather = this.state.location.city === '' ? placeholder : weatherData
-        
+
         return (
             <Container sx={{ paddingTop: 2 }}>
-                { showWeather }
+                <Typography variant="h3" component="div">{ this.state.location.town !== '' ? this.state.location.town : this.state.location.city }, {this.state.location.country}</Typography>
+                {showWeather}
                 <Button variant="contained" onClick={this.getWeatherData}>Update</Button>
             </Container>
-            
-        
+
+
         )
     }
 }
